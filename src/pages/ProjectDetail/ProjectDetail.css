@@ -1,0 +1,24 @@
+.project-page .project-page-info {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #E6E6E6;
+    padding: 12px 24px;
+    border-radius: 8px;
+}
+
+.project-page .project-page-info h5 {
+    font-size: 16px;
+    font-family: 'Poppins-Medium';
+    margin-bottom: 0 !important;
+    align-content: center;
+}
+
+.project-page .project-page-info svg {
+    cursor: pointer;
+    color: #00379e;
+}
+
+.project-page .project-page-info p {
+    cursor: pointer;
+
+}

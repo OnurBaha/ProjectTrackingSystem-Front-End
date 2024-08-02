@@ -1,0 +1,80 @@
+.login-register-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.login-register-tab .nav-link {
+    margin-top: 3rem;
+    font-family: "Poppins-Medium";
+    color: #00379e;
+}
+
+.login-register-tab .nav-link:hover {
+    color: #00379e;
+}
+
+form.login-form,
+form.register-form {
+    font-family: "Poppins-Regular";
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.login-register-page {
+    margin-bottom: 14rem;
+}
+
+.login-form span,
+.register-form span {
+    margin-bottom: 8px;
+}
+
+
+.login-form input,
+.register-form input {
+    padding: 8px 16px;
+    width: 100%;
+    margin-bottom: 16px;
+    background-color: #120c0c18;
+    border: 1px solid #e6e6e6;
+}
+
+.login-form button,
+.register-form button {
+    border-radius: 8px;
+    padding: 12px 24px;
+    border: 0;
+    background-color: #00379e;
+}
+
+.login-form button:hover,
+.register-form button:hover {
+    border: none;
+    background-color: #00379e;
+}
+
+.login-form input:focus,
+.register-form input:focus {
+    border-color: #00379e !important;
+    box-shadow: 0 0 0 .25rem #00379e !important;
+    outline: 0 !important;
+}
+
+.login-form input,
+.register-form input {
+    border-radius: 8px;
+}
+
+.login-register-page .ui.pointing.label {
+    margin-bottom: 1em !important;
+}
+
+.ui.pointing.label,
+.ui[class*="pointing above"].label {
+    margin-top: 0 !important;
+}

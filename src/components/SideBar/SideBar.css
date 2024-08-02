@@ -1,0 +1,9 @@
+.sidebar span {
+    font-size: 1.3rem !important;
+}
+.sidebar{
+    font-family: 'Poppins-Regular';
+}
+.sidebar ul li{
+    cursor: pointer;
+}
