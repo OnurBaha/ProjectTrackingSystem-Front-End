@@ -1,46 +1,126 @@
-# Getting Started with Create React App
+# Proje Takip Sistemi  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bu proje, birden fazla görevi projelere ekleyebilen ve görevlerin durumlarını izleyebilen bir sistemdir. Proje, kullanıcıların yeni projeler oluşturmasına, bu projelere görev eklemesine ve görevleri düzenlemesine olanak sağlar.
 
-## Available Scripts
+## Amaç  
+- Bir projeye birden fazla görev ekleyebilmek  
+- Proje ve görevlerin durumlarını takip etmek  
+- Kullanıcıların güvenli giriş yaparak projeleri yönetebilmesi  
 
-In the project directory, you can run:
+## Gereksinimler  
+- Kimlik doğrulama sistemi (JWT ile)  
+- Kullanıcılar proje ekleyebilmeli ve projelere görev tanımlayabilmeli  
+- Proje ve görevlerin başlangıç/bitiş tarihleri ile durumları izlenebilmeli  
 
-### `npm start`
+## Teknolojiler  
+### Backend  
+- **ASP.NET Core**: API geliştirme  
+- **Entity Framework Core**: ORM aracı  
+- **MSSQL**: Veritabanı yönetimi  
+- **AutoMapper**: Nesne dönüşümleri  
+- **JWT**: Kimlik doğrulama  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Frontend  
+- **React**: Kullanıcı arayüzü geliştirme  
+- **Redux**: Durum yönetimi  
+- **Axios**: API iletişimi  
+- **Bootstrap**: UI bileşenleri  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Veri Yapısı  
+### Projeler  
+- **ID**: Projenin benzersiz kimliği (otomatik)  
+- **Proje Adı**: Zorunlu alan  
+- **Başlangıç Tarihi**: Zorunlu alan  
+- **Bitiş Tarihi**: Zorunlu alan  
 
-### `npm test`
+### Görevler  
+- **ID**: Görevin benzersiz kimliği (otomatik)  
+- **Proje ID**: Görevin ait olduğu proje (foreign key)  
+- **Başlık**: Zorunlu alan  
+- **Açıklama**: Opsiyonel  
+- **Oluşturulma Tarihi**: Otomatik atanır  
+- **Durum**: Zorunlu (new, in_progress, completed)  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## İşlevler  
+1. **Proje Oluşturma**  
+   - Kullanıcı, proje adı, başlangıç ve bitiş tarihini girer.  
+   - "Proje Oluştur" butonuna basarak yeni proje ekler.  
 
-### `npm run build`
+2. **Görev Ekleme ve İlişkilendirme**  
+   - Kullanıcılar projelere görev ekler ve proje seçimi yapar.  
+   - Görev, oluşturulma tarihi ve durumu ile kaydedilir.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Görev Düzenleme ve Silme**  
+   - Kullanıcılar görevleri düzenleyebilir veya silebilir.  
+   - Görev durumu güncellenebilir.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Proje ve Görev Listesi**  
+   - Projeler ve görevler, proje adı ve görev durumuna göre listelenir.  
+   - Her görev için başlık, açıklama, oluşturulma tarihi ve durum görüntülenir.  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Veritabanı Tasarımı  
+### Projeler Tablosu (Projects)  
+| Alan Adı   | Veri Tipi  | Açıklama                     |  
+|------------|------------|------------------------------|  
+| id         | INT        | Benzersiz kimlik (PK)        |  
+| name       | VARCHAR    | Proje adı (Not Null)         |  
+| start_date | DATE       | Başlangıç tarihi (Not Null)  |  
+| end_date   | DATE       | Bitiş tarihi (Not Null)      |  
 
-### `npm run eject`
+### Görevler Tablosu (Tasks)  
+| Alan Adı      | Veri Tipi        | Açıklama                          |  
+|---------------|------------------|-----------------------------------|  
+| id            | INT              | Benzersiz kimlik (PK)             |  
+| project_id    | INT (Foreign Key)| İlgili proje ID’si                |  
+| title         | VARCHAR          | Görev başlığı (Not Null)          |  
+| description   | TEXT             | Görev açıklaması (Opsiyonel)      |  
+| creation_date | DATETIME         | Oluşturulma tarihi (Not Null)     |  
+| status        | ENUM             | Durum (new, in_progress, completed) |  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Kullanıcı Arayüzü  
+1. **Proje Oluşturma Formu**  
+   - Proje adı, başlangıç tarihi ve bitiş tarihi alanları bulunur.  
+   - "Proje Oluştur" butonu ile proje eklenir.  
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Proje Detayları ve Görev Listesi Ekranı**  
+   - Proje bilgileri ve projeye bağlı görevler listelenir.  
+   - Görevler düzenlenebilir ve silinebilir.  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Kurulum  
+1. **Backend Kurulumu:**  
+   - Projeyi klonlayın:  
+     ```bash
+     git clone <backend-repository-url>
+     ```
+   - MSSQL veritabanı bağlantısını `appsettings.json` dosyasında yapılandırın.  
+   - Bağımlılıkları yükleyin:  
+     ```bash
+     dotnet restore
+     ```
+   - Veritabanı migrasyonu çalıştırın:  
+     ```bash
+     dotnet ef database update
+     ```
+   - Uygulamayı başlatın:  
+     ```bash
+     dotnet run --project WebAPI
+     ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+2. **Frontend Kurulumu:**  
+   - Projeyi klonlayın:  
+     ```bash
+     git clone <frontend-repository-url>
+     ```
+   - Bağımlılıkları yükleyin:  
+     ```bash
+     npm install
+     ```
+   - Uygulamayı başlatın:  
+     ```bash
+     npm start
+     ```
 
-## Learn More
+## Katkıda Bulunma  
+Herhangi bir katkıda bulunmak için **Pull Request** oluşturun.  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
